@@ -1,4 +1,5 @@
 import React from 'react';
+import Statistics from './Statistacs/Statistacs';
 
 class App extends React.Component {
   state = {
@@ -55,11 +56,13 @@ class App extends React.Component {
           Bad
         </button>
         <h2 className="Stats">Statistics</h2>
-        <p>Good:{this.state.good}</p>
-        <p>Neutral:{this.state.neutral}</p>
-        <p>Bad:{this.state.bad}</p>
-        <p>Total:{totalFeedback}</p>
-        <p>Positive fedback:{positiveFeedbackPercentage}%</p>
+        <Statistics
+        good={this.state.good}
+        neutral={this.state.neutral}
+        bad={this.state.bad}
+        total={totalFeedback}
+        positivePercentage={positiveFeedbackPercentage}
+        />
       </div>
     );
   }
