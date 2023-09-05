@@ -1,5 +1,6 @@
 import React from 'react';
 import Statistics from './Statistacs/Statistacs';
+import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 
 class App extends React.Component {
   state = {
@@ -8,27 +9,31 @@ class App extends React.Component {
     bad: 0,
   };
 
-  handleFeedbackGood = () => {
-    this.setState(prevState => {
-      return {
-        good: prevState.good + 1,
-      };
-    });
+  handleFeedBack = type => {
+    this.setState(prevState => ({ [type]: prevState[type] + 1 }));
   };
-  handleFeedbackNeutral = () => {
-    this.setState(prevState => {
-      return {
-        neutral: prevState.neutral + 1,
-      };
-    });
-  };
-  handleFeedbackBad = () => {
-    this.setState(prevState => {
-      return {
-        bad: prevState.neutral + 1,
-      };
-    });
-  };
+
+  // handleFeedbackGood = () => {
+  //   this.setState(prevState => {
+  //     return {
+  //       good: prevState.good + 1,
+  //     };
+  //   });
+  // };
+  // handleFeedbackNeutral = () => {
+  //   this.setState(prevState => {
+  //     return {
+  //       neutral: prevState.neutral + 1,
+  //     };
+  //   });
+  // };
+  // handleFeedbackBad = () => {
+  //   this.setState(prevState => {
+  //     return {
+  //       bad: prevState.bad + 1,
+  //     };
+  //   });
+  // };
 
   countTotalFeedback = () =>
     this.state.good + this.state.neutral + this.state.bad;
@@ -42,26 +47,22 @@ class App extends React.Component {
   render() {
     const totalFeedback = this.countTotalFeedback();
     const positiveFeedbackPercentage = this.countPositiveFeedbackPercentage();
+    const feedbackOptions = Object.keys(this.state);
 
     return (
       <div className="Feedback">
         <h2>Please leave feedback</h2>
-        <button type="button" onClick={this.handleFeedbackGood}>
-          Good
-        </button>
-        <button type="button" onClick={this.handleFeedbackNeutral}>
-          Neutral
-        </button>
-        <button type="button" onClick={this.handleFeedbackBad}>
-          Bad
-        </button>
+        <FeedbackOptions
+          options={feedbackOptions}
+          onLeaveFeedback={this.handleFeedBack}
+        />
         <h2 className="Stats">Statistics</h2>
         <Statistics
-        good={this.state.good}
-        neutral={this.state.neutral}
-        bad={this.state.bad}
-        total={totalFeedback}
-        positivePercentage={positiveFeedbackPercentage}
+          good={this.state.good}
+          neutral={this.state.neutral}
+          bad={this.state.bad}
+          total={totalFeedback}
+          positivePercentage={positiveFeedbackPercentage}
         />
       </div>
     );
