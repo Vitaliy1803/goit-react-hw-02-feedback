@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
+import { Container } from './Notification.styled';
 
 const Notification = ({ massage }) => {
   return (
-    <div>
-      <h2>{massage}</h2>
-    </div>
+    <Container>
+      <p>{massage}</p>
+    </Container>
   );
 };
 
